@@ -1,3 +1,5 @@
+using Trustlink.VM;
+
 namespace Trustlink.SmartContract.Iterators
 {
     internal class ConcatenatedIterator : IIterator

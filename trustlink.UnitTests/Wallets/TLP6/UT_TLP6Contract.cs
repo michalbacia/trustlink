@@ -2,18 +2,18 @@ using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Trustlink.IO.Json;
 using Trustlink.SmartContract;
-using Trustlink.Wallets.NEP6;
+using Trustlink.Wallets.TLP6;
 
-namespace Trustlink.UnitTests.Wallets.NEP6
+namespace Trustlink.UnitTests.Wallets.TLP6
 {
     [TestClass]
-    public class UT_NEP6Contract
+    public class UT_TLP6Contract
     {
         [TestMethod]
         public void TestFromNullJson()
         {
-            NEP6Contract nep6Contract = NEP6Contract.FromJson(null);
-            nep6Contract.Should().BeNull();
+            var tlp6Contract = TLP6Contract.FromJson(null);
+            tlp6Contract.Should().BeNull();
         }
 
         [TestMethod]
@@ -23,19 +23,19 @@ namespace Trustlink.UnitTests.Wallets.NEP6
                 "\"parameters\":[{\"name\":\"signature\",\"type\":\"Signature\"}],\"deployed\":false}";
             JObject @object = JObject.Parse(json);
 
-            NEP6Contract nep6Contract = NEP6Contract.FromJson(@object);
-            nep6Contract.Script.Should().BeEquivalentTo("2103ef891df4c0b7eefb937d21ea0fb88cde8e0d82a7ff11872b5e7047969dafb4eb68747476aa".HexToBytes());
-            nep6Contract.ParameterList.Length.Should().Be(1);
-            nep6Contract.ParameterList[0].Should().Be(ContractParameterType.Signature);
-            nep6Contract.ParameterNames.Length.Should().Be(1);
-            nep6Contract.ParameterNames[0].Should().Be("signature");
-            nep6Contract.Deployed.Should().BeFalse();
+            var tlp6Contract = TLP6Contract.FromJson(@object);
+            tlp6Contract.Script.Should().BeEquivalentTo("2103ef891df4c0b7eefb937d21ea0fb88cde8e0d82a7ff11872b5e7047969dafb4eb68747476aa".HexToBytes());
+            tlp6Contract.ParameterList.Length.Should().Be(1);
+            tlp6Contract.ParameterList[0].Should().Be(ContractParameterType.Signature);
+            tlp6Contract.ParameterNames.Length.Should().Be(1);
+            tlp6Contract.ParameterNames[0].Should().Be("signature");
+            tlp6Contract.Deployed.Should().BeFalse();
         }
 
         [TestMethod]
         public void TestToJson()
         {
-            NEP6Contract nep6Contract = new NEP6Contract()
+            var nep6Contract = new TLP6Contract()
             {
                 Script = new byte[] { 0x00, 0x01 },
                 ParameterList = new ContractParameterType[] { ContractParameterType.Boolean, ContractParameterType.Integer },

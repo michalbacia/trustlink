@@ -30,22 +30,22 @@ namespace Trustlink.UnitTests.Wallets
         }
 
         [TestMethod]
-        public void Check_GAS()
+        public void Check_LINK()
         {
-            var descriptor = new AssetDescriptor(NativeContract.GAS.Hash);
-            descriptor.AssetId.Should().Be(NativeContract.GAS.Hash);
-            descriptor.AssetName.Should().Be("GAS");
-            descriptor.ToString().Should().Be("GAS");
+            var descriptor = new AssetDescriptor(NativeContract.LINK.Hash);
+            descriptor.AssetId.Should().Be(NativeContract.LINK.Hash);
+            descriptor.AssetName.Should().Be("LINK");
+            descriptor.ToString().Should().Be("LINK");
             descriptor.Decimals.Should().Be(8);
         }
 
         [TestMethod]
-        public void Check_NEO()
+        public void Check_TRUST()
         {
-            var descriptor = new AssetDescriptor(NativeContract.NEO.Hash);
-            descriptor.AssetId.Should().Be(NativeContract.NEO.Hash);
-            descriptor.AssetName.Should().Be("NEO");
-            descriptor.ToString().Should().Be("NEO");
+            var descriptor = new AssetDescriptor(NativeContract.TRUST.Hash);
+            descriptor.AssetId.Should().Be(NativeContract.TRUST.Hash);
+            descriptor.AssetName.Should().Be("TRUST");
+            descriptor.ToString().Should().Be("TRUST");
             descriptor.Decimals.Should().Be(0);
         }
     }

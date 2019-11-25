@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Trustlink.VM;
 
 namespace Trustlink.SmartContract.Iterators
 {

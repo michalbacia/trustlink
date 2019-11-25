@@ -2,8 +2,10 @@ using System;
 using System.Linq;
 using System.Numerics;
 using Trustlink.IO.Json;
-using VMArray = Neo.VM.Types.Array;
-using VMBoolean = Neo.VM.Types.Boolean;
+using Trustlink.VM;
+using Trustlink.VM.Types;
+using VMArray = Trustlink.VM.Types.Array;
+using VMBoolean = Trustlink.VM.Types.Boolean;
 
 namespace Trustlink.SmartContract
 {

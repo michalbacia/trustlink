@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Trustlink.Cryptography.ECC;
+using Trustlink.VM;
 using Trustlink.Wallets;
 
 namespace Trustlink.SmartContract

@@ -6,9 +6,10 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using Trustlink.IO.Json;
 using Trustlink.SmartContract;
+using Trustlink.Wallets.TLP6;
 using UserWallet = Trustlink.Wallets.SQLite.UserWallet;
 
-namespace Trustlink.Wallets.NEP6
+namespace Trustlink.Wallets.TLP6
 {
     // ReSharper disable once InconsistentNaming
     public class TLP6Wallet: Wallet
@@ -148,7 +149,7 @@ namespace Trustlink.Wallets.NEP6
 
         public KeyPair DecryptKey(string tlp2key)
         {
-            return new KeyPair(GetPrivateKeyFromNEP2(tlp2key, password, Scrypt.N, Scrypt.R, Scrypt.P));
+            return new KeyPair(GetPrivateKeyFromTLP2(tlp2key, password, Scrypt.N, Scrypt.R, Scrypt.P));
         }
 
         public override bool DeleteAccount(UInt160 scriptHash)
@@ -163,7 +164,7 @@ namespace Trustlink.Wallets.NEP6
         {
             lock (accounts)
             {
-                accounts.TryGetValue(scriptHash, out NEP6Account account);
+                accounts.TryGetValue(scriptHash, out TLP6Account account);
                 return account;
             }
         }
@@ -172,7 +173,7 @@ namespace Trustlink.Wallets.NEP6
         {
             lock (accounts)
             {
-                foreach (NEP6Account account in accounts.Values)
+                foreach (TLP6Account account in accounts.Values)
                     yield return account;
             }
         }
@@ -184,14 +185,14 @@ namespace Trustlink.Wallets.NEP6
             {
                 key = new KeyPair(ecdsa.ExportParameters(true).D);
             }
-            NEP6Contract contract = new NEP6Contract
+            TLP6Contract contract = new TLP6Contract
             {
                 Script = Contract.CreateSignatureRedeemScript(key.PublicKey),
                 ParameterList = new[] { ContractParameterType.Signature },
                 ParameterNames = new[] { "signature" },
                 Deployed = false
             };
-            NEP6Account account = new NEP6Account(this, contract.ScriptHash, key, password)
+            TLP6Account account = new TLP6Account(this, contract.ScriptHash, key, password)
             {
                 Contract = contract
             };
@@ -202,14 +203,14 @@ namespace Trustlink.Wallets.NEP6
         public override WalletAccount Import(string wif)
         {
             KeyPair key = new KeyPair(GetPrivateKeyFromWIF(wif));
-            NEP6Contract contract = new NEP6Contract
+            TLP6Contract contract = new TLP6Contract
             {
                 Script = Contract.CreateSignatureRedeemScript(key.PublicKey),
                 ParameterList = new[] { ContractParameterType.Signature },
                 ParameterNames = new[] { "signature" },
                 Deployed = false
             };
-            NEP6Account account = new NEP6Account(this, contract.ScriptHash, key, password)
+            TLP6Account account = new TLP6Account(this, contract.ScriptHash, key, password)
             {
                 Contract = contract
             };
@@ -219,19 +220,19 @@ namespace Trustlink.Wallets.NEP6
 
         public override WalletAccount Import(string tlp2, string passphrase, int N = 16384, int r = 8, int p = 8)
         {
-            KeyPair key = new KeyPair(GetPrivateKeyFromNEP2(tlp2, passphrase, N, r, p));
-            NEP6Contract contract = new NEP6Contract
+            KeyPair key = new KeyPair(GetPrivateKeyFromTLP2(tlp2, passphrase, N, r, p));
+            TLP6Contract contract = new TLP6Contract
             {
                 Script = Contract.CreateSignatureRedeemScript(key.PublicKey),
                 ParameterList = new[] { ContractParameterType.Signature },
                 ParameterNames = new[] { "signature" },
                 Deployed = false
             };
-            NEP6Account account;
+            TLP6Account account;
             if (Scrypt.N == 16384 && Scrypt.R == 8 && Scrypt.P == 8)
-                account = new NEP6Account(this, contract.ScriptHash, tlp2);
+                account = new TLP6Account(this, contract.ScriptHash, tlp2);
             else
-                account = new NEP6Account(this, contract.ScriptHash, key, passphrase);
+                account = new TLP6Account(this, contract.ScriptHash, key, passphrase);
             account.Contract = contract;
             AddAccount(account, true);
             return account;
@@ -279,7 +280,7 @@ namespace Trustlink.Wallets.NEP6
         {
             lock (accounts)
             {
-                NEP6Account account = accounts.Values.FirstOrDefault(p => !p.Decrypted);
+                TLP6Account account = accounts.Values.FirstOrDefault(p => !p.Decrypted);
                 if (account == null)
                 {
                     account = accounts.Values.FirstOrDefault(p => p.HasKey);

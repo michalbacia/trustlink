@@ -1,7 +1,8 @@
 using System;
 using Trustlink.IO.Json;
 
-namespace Trustlink.Wallets.NEP6
+
+namespace Trustlink.Wallets.TLP6
 {
     internal class TLP6Account : WalletAccount
     {
@@ -53,7 +54,7 @@ namespace Trustlink.Wallets.NEP6
             if (nep2key == null) return null;
             if (key == null)
             {
-                key = new KeyPair(Wallet.GetPrivateKeyFromNEP2(nep2key, password, wallet.Scrypt.N, wallet.Scrypt.R, wallet.Scrypt.P));
+                key = new KeyPair(Wallet.GetPrivateKeyFromTLP2(nep2key, password, wallet.Scrypt.N, wallet.Scrypt.R, wallet.Scrypt.P));
             }
             return key;
         }
@@ -66,7 +67,7 @@ namespace Trustlink.Wallets.NEP6
             account["isDefault"] = IsDefault;
             account["lock"] = Lock;
             account["key"] = nep2key;
-            account["contract"] = ((NEP6Contract)Contract)?.ToJson();
+            account["contract"] = ((TLP6Contract)Contract)?.ToJson();
             account["extra"] = Extra;
             return account;
         }
@@ -75,7 +76,7 @@ namespace Trustlink.Wallets.NEP6
         {
             try
             {
-                Wallet.GetPrivateKeyFromNEP2(nep2key, password, wallet.Scrypt.N, wallet.Scrypt.R, wallet.Scrypt.P);
+                Wallet.GetPrivateKeyFromTLP2(nep2key, password, wallet.Scrypt.N, wallet.Scrypt.R, wallet.Scrypt.P);
                 return true;
             }
             catch (FormatException)

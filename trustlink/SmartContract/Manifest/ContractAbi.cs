@@ -4,7 +4,7 @@ using Trustlink.IO.Json;
 namespace Trustlink.SmartContract.Manifest
 {
     /// <summary>
-    /// For technical details of ABI, please refer to TLP-3: NeoContract ABI. (https://github.com/neo-project/proposals/blob/master/tlp-3.mediawiki)
+    /// For technical details of ABI, please refer to TLP-3: NeoContract ABI. 
     /// </summary>
     public class ContractAbi
     {

@@ -149,8 +149,8 @@ namespace Trustlink.Network.P2P
                 {
                     localAddresses.Add(UPnP.GetExternalIP());
 
-                    if (ListenerTcpPort > 0) UPnP.ForwardPort(ListenerTcpPort, ProtocolType.Tcp, "NEO Tcp");
-                    if (ListenerWsPort > 0) UPnP.ForwardPort(ListenerWsPort, ProtocolType.Tcp, "NEO WebSocket");
+                    if (ListenerTcpPort > 0) UPnP.ForwardPort(ListenerTcpPort, ProtocolType.Tcp, "TRUST Tcp");
+                    if (ListenerWsPort > 0) UPnP.ForwardPort(ListenerWsPort, ProtocolType.Tcp, "TRUST WebSocket");
                 }
                 catch { }
             }

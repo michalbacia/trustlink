@@ -9,15 +9,15 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Trustlink.IO.Json;
 using Trustlink.SmartContract;
 using Trustlink.Wallets;
-using Trustlink.Wallets.NEP6;
 using Trustlink.Wallets.SQLite;
+using Trustlink.Wallets.TLP6;
 
-namespace Trustlink.UnitTests.Wallets.NEP6
+namespace Trustlink.UnitTests.Wallets.TLP6
 {
     [TestClass]
-    public class UT_NEP6Wallet
+    public class UT_TLP6Wallet
     {
-        private NEP6Wallet uut;
+        private TLP6Wallet uut;
         private static string wPath;
         private static KeyPair keyPair;
         private static string nep2key;
@@ -42,7 +42,7 @@ namespace Trustlink.UnitTests.Wallets.NEP6
             nep2key = keyPair.Export("123", 0, 0, 0);
         }
 
-        private NEP6Wallet CreateWallet()
+        private TLP6Wallet CreateWallet()
         {
             return TestUtils.GenerateTestWallet();
         }

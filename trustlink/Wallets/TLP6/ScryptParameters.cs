@@ -1,6 +1,6 @@
 using Trustlink.IO.Json;
 
-namespace Trustlink.Wallets.NEP6
+namespace Trustlink.Wallets.TLP6
 {
     public class ScryptParameters
     {

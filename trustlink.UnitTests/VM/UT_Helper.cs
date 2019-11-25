@@ -2,6 +2,7 @@ using System;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Trustlink.SmartContract;
+using Trustlink.VM;
 
 namespace Trustlink.UnitTests.VM
 {

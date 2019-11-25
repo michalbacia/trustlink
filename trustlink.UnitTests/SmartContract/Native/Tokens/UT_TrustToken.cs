@@ -11,11 +11,12 @@ using Trustlink.Persistence;
 using Trustlink.SmartContract;
 using Trustlink.SmartContract.Native;
 using Trustlink.UnitTests.Extensions;
+using Trustlink.VM;
 
 namespace Trustlink.UnitTests.SmartContract.Native.Tokens
 {
     [TestClass]
-    public class UT_NeoToken
+    public class UT_TrustToken
     {
         private Store Store;
 
@@ -27,16 +28,16 @@ namespace Trustlink.UnitTests.SmartContract.Native.Tokens
         }
 
         [TestMethod]
-        public void Check_Name() => NativeContract.NEO.Name().Should().Be("NEO");
+        public void Check_Name() => NativeContract.TRUST.Name().Should().Be("NEO");
 
         [TestMethod]
-        public void Check_Symbol() => NativeContract.NEO.Symbol().Should().Be("neo");
+        public void Check_Symbol() => NativeContract.TRUST.Symbol().Should().Be("neo");
 
         [TestMethod]
-        public void Check_Decimals() => NativeContract.NEO.Decimals().Should().Be(0);
+        public void Check_Decimals() => NativeContract.TRUST.Decimals().Should().Be(0);
 
         [TestMethod]
-        public void Check_SupportedStandards() => NativeContract.NEO.SupportedStandards().Should().BeEquivalentTo(new string[] { "NEP-5", "NEP-10" });
+        public void Check_SupportedStandards() => NativeContract.TRUST.SupportedStandards().Should().BeEquivalentTo(new string[] { "NEP-5", "NEP-10" });
 
         [TestMethod]
         public void Check_Vote()
@@ -128,7 +129,7 @@ namespace Trustlink.UnitTests.SmartContract.Native.Tokens
 
             // Check GetRegisteredValidators
 
-            var validators = NativeContract.NEO.GetRegisteredValidators(snapshot).OrderBy(u => u.PublicKey).ToArray();
+            var validators = NativeContract.TRUST.GetRegisteredValidators(snapshot).OrderBy(u => u.PublicKey).ToArray();
             var check = Blockchain.StandbyValidators.Select(u => u.EncodePoint(true)).ToList();
             check.Add(point); // Add the new member
 
@@ -162,10 +163,10 @@ namespace Trustlink.UnitTests.SmartContract.Native.Tokens
 
             // Transfer
 
-            NativeContract.NEO.Transfer(snapshot, from, to, BigInteger.One, false).Should().BeFalse(); // Not signed
-            NativeContract.NEO.Transfer(snapshot, from, to, BigInteger.One, true).Should().BeTrue();
-            NativeContract.NEO.BalanceOf(snapshot, from).Should().Be(99_999_999);
-            NativeContract.NEO.BalanceOf(snapshot, to).Should().Be(1);
+            NativeContract.TRUST.Transfer(snapshot, from, to, BigInteger.One, false).Should().BeFalse(); // Not signed
+            NativeContract.TRUST.Transfer(snapshot, from, to, BigInteger.One, true).Should().BeTrue();
+            NativeContract.TRUST.BalanceOf(snapshot, from).Should().Be(99_999_999);
+            NativeContract.TRUST.BalanceOf(snapshot, to).Should().Be(1);
 
             // Check unclaim
 
@@ -179,19 +180,19 @@ namespace Trustlink.UnitTests.SmartContract.Native.Tokens
 
             keyCount = snapshot.Storages.GetChangeSet().Count();
 
-            NativeContract.NEO.Transfer(snapshot, to, from, BigInteger.One, true).Should().BeTrue();
-            NativeContract.NEO.BalanceOf(snapshot, to).Should().Be(0);
+            NativeContract.TRUST.Transfer(snapshot, to, from, BigInteger.One, true).Should().BeTrue();
+            NativeContract.TRUST.BalanceOf(snapshot, to).Should().Be(0);
             snapshot.Storages.GetChangeSet().Count().Should().Be(keyCount - 1);  // Remove neo balance from address two
 
             // Bad inputs
 
-            NativeContract.NEO.Transfer(snapshot, from, to, BigInteger.MinusOne, true).Should().BeFalse();
-            NativeContract.NEO.Transfer(snapshot, new byte[19], to, BigInteger.One, false).Should().BeFalse();
-            NativeContract.NEO.Transfer(snapshot, from, new byte[19], BigInteger.One, false).Should().BeFalse();
+            NativeContract.TRUST.Transfer(snapshot, from, to, BigInteger.MinusOne, true).Should().BeFalse();
+            NativeContract.TRUST.Transfer(snapshot, new byte[19], to, BigInteger.One, false).Should().BeFalse();
+            NativeContract.TRUST.Transfer(snapshot, from, new byte[19], BigInteger.One, false).Should().BeFalse();
 
             // More than balance
 
-            NativeContract.NEO.Transfer(snapshot, to, from, new BigInteger(2), true).Should().BeFalse();
+            NativeContract.TRUST.Transfer(snapshot, to, from, new BigInteger(2), true).Should().BeFalse();
         }
 
         [TestMethod]
@@ -201,11 +202,11 @@ namespace Trustlink.UnitTests.SmartContract.Native.Tokens
             byte[] account = Contract.CreateMultiSigRedeemScript(Blockchain.StandbyValidators.Length / 2 + 1,
                 Blockchain.StandbyValidators).ToScriptHash().ToArray();
 
-            NativeContract.NEO.BalanceOf(snapshot, account).Should().Be(100_000_000);
+            NativeContract.TRUST.BalanceOf(snapshot, account).Should().Be(100_000_000);
 
             account[5]++; // Without existing balance
 
-            NativeContract.NEO.BalanceOf(snapshot, account).Should().Be(0);
+            NativeContract.TRUST.BalanceOf(snapshot, account).Should().Be(0);
         }
 
         [TestMethod]
@@ -226,9 +227,9 @@ namespace Trustlink.UnitTests.SmartContract.Native.Tokens
 
             var engine = new ApplicationEngine(TriggerType.Application, null, snapshot, 0, true);
 
-            engine.LoadScript(NativeContract.NEO.Script);
+            engine.LoadScript(NativeContract.TRUST.Script);
 
-            var result = NativeContract.NEO.Initialize(engine);
+            var result = NativeContract.TRUST.Initialize(engine);
 
             result.Should().Be(false);
         }
@@ -242,15 +243,15 @@ namespace Trustlink.UnitTests.SmartContract.Native.Tokens
             script.Emit(OpCode.NOP);
             engine.LoadScript(script.ToArray());
 
-            NativeContract.NEO.Invoke(engine).Should().BeFalse();
+            NativeContract.TRUST.Invoke(engine).Should().BeFalse();
         }
 
         internal static (bool State, bool Result) Check_Vote(Snapshot snapshot, byte[] account, byte[][] pubkeys, bool signAccount)
         {
             var engine = new ApplicationEngine(TriggerType.Application,
-                new Nep5NativeContractExtensions.ManualWitness(signAccount ? new UInt160(account) : UInt160.Zero), snapshot, 0, true);
+                new Tlp5NativeContractExtensions.ManualWitness(signAccount ? new UInt160(account) : UInt160.Zero), snapshot, 0, true);
 
-            engine.LoadScript(NativeContract.NEO.Script);
+            engine.LoadScript(NativeContract.TRUST.Script);
 
             var script = new ScriptBuilder();
 
@@ -279,7 +280,7 @@ namespace Trustlink.UnitTests.SmartContract.Native.Tokens
         {
             var engine = new ApplicationEngine(TriggerType.Application, null, snapshot, 0, true);
 
-            engine.LoadScript(NativeContract.NEO.Script);
+            engine.LoadScript(NativeContract.TRUST.Script);
 
             var script = new ScriptBuilder();
             script.EmitPush(pubkey);
@@ -303,7 +304,7 @@ namespace Trustlink.UnitTests.SmartContract.Native.Tokens
         {
             var engine = new ApplicationEngine(TriggerType.Application, null, snapshot, 0, true);
 
-            engine.LoadScript(NativeContract.NEO.Script);
+            engine.LoadScript(NativeContract.TRUST.Script);
 
             var script = new ScriptBuilder();
             script.EmitPush(0);
@@ -323,7 +324,7 @@ namespace Trustlink.UnitTests.SmartContract.Native.Tokens
         {
             var engine = new ApplicationEngine(TriggerType.Application, null, snapshot, 0, true);
 
-            engine.LoadScript(NativeContract.NEO.Script);
+            engine.LoadScript(NativeContract.TRUST.Script);
 
             var script = new ScriptBuilder();
             script.EmitPush(snapshot.PersistingBlock.Index);

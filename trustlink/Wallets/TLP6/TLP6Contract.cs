@@ -2,7 +2,7 @@ using System.Linq;
 using Trustlink.IO.Json;
 using Trustlink.SmartContract;
 
-namespace Trustlink.Wallets.NEP6
+namespace Trustlink.Wallets.TLP6
 {
     internal class TLP6Contract : Contract
     {

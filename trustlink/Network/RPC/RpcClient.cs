@@ -224,7 +224,7 @@ namespace Trustlink.Network.RPC
         }
 
         /// <summary>
-        /// Returns the current NEO consensus nodes information and voting status.
+        /// Returns the current TRUST consensus nodes information and voting status.
         /// </summary>
         public RpcValidator[] GetValidators()
         {
@@ -266,7 +266,7 @@ namespace Trustlink.Network.RPC
         }
 
         /// <summary>
-        /// Broadcasts a transaction over the NEO network.
+        /// Broadcasts a transaction over the TRUST network.
         /// </summary>
         public bool SendRawTransaction(string rawTransaction)
         {
@@ -274,7 +274,7 @@ namespace Trustlink.Network.RPC
         }
 
         /// <summary>
-        /// Broadcasts a raw block over the NEO network.
+        /// Broadcasts a raw block over the TRUST network.
         /// </summary>
         public bool SubmitBlock(string block)
         {
@@ -282,7 +282,7 @@ namespace Trustlink.Network.RPC
         }
 
         /// <summary>
-        /// Verifies that the address is a correct NEO address.
+        /// Verifies that the address is a correct TRUST address.
         /// </summary>
         public RpcValidateAddressResult ValidateAddress(string address)
         {

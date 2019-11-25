@@ -1,5 +1,6 @@
 using System;
 using Trustlink.Network.P2P.Payloads;
+using Trustlink.VM;
 
 namespace Trustlink.SmartContract
 {

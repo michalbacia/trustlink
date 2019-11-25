@@ -1,4 +1,5 @@
 using Trustlink.SmartContract.Enumerators;
+using Trustlink.VM;
 
 namespace Trustlink.SmartContract.Iterators
 {

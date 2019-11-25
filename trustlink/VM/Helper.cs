@@ -5,8 +5,9 @@ using System.Numerics;
 using Trustlink.Cryptography.ECC;
 using Trustlink.IO;
 using Trustlink.SmartContract;
-using VMArray = Neo.VM.Types.Array;
-using VMBoolean = Neo.VM.Types.Boolean;
+using Trustlink.VM.Types;
+using VMArray = Trustlink.VM.Types.Array;
+using VMBoolean = Trustlink.VM.Types.Boolean;
 
 namespace Trustlink.VM
 {

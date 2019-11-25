@@ -1,16 +1,18 @@
 using System.Numerics;
+using Trustlink.VM;
+using Trustlink.VM.Types;
 
 namespace Trustlink.SmartContract.Native.Tokens
 {
-    public class Nep5AccountState
+    public class Tlp5AccountState
     {
         public BigInteger Balance;
 
-        public Nep5AccountState()
+        public Tlp5AccountState()
         {
         }
 
-        public Nep5AccountState(byte[] data)
+        public Tlp5AccountState(byte[] data)
         {
             FromByteArray(data);
         }

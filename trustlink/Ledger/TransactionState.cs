@@ -1,6 +1,7 @@
 using System.IO;
 using Trustlink.IO;
 using Trustlink.Network.P2P.Payloads;
+using Trustlink.VM;
 
 namespace Trustlink.Ledger
 {

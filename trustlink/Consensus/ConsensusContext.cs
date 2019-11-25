@@ -10,6 +10,7 @@ using Trustlink.Network.P2P.Payloads;
 using Trustlink.Persistence;
 using Trustlink.SmartContract;
 using Trustlink.SmartContract.Native;
+using Trustlink.VM;
 using Trustlink.Wallets;
 
 namespace Trustlink.Consensus
@@ -338,10 +339,10 @@ namespace Trustlink.Consensus
                 {
                     PrevHash = Snapshot.CurrentBlockHash,
                     Index = Snapshot.Height + 1,
-                    NextConsensus = Blockchain.GetConsensusAddress(NativeContract.NEO.GetValidators(Snapshot).ToArray())
+                    NextConsensus = Blockchain.GetConsensusAddress(NativeContract.TRUST.GetValidators(Snapshot).ToArray())
                 };
                 var pv = Validators;
-                Validators = NativeContract.NEO.GetNextBlockValidators(Snapshot);
+                Validators = NativeContract.TRUST.GetNextBlockValidators(Snapshot);
                 if (_witnessSize == 0 || (pv != null && pv.Length != Validators.Length))
                 {
                     // Compute the expected size of the witness

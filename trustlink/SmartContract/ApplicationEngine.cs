@@ -105,20 +105,20 @@ namespace Trustlink.SmartContract
         }
 
         public static ApplicationEngine Run(byte[] script, Snapshot snapshot,
-            IVerifiable container = null, Block persistingBlock = null, bool testMode = false, long extraGAS = default)
+            IVerifiable container = null, Block persistingBlock = null, bool testMode = false, long extraLINK = default)
         {
             snapshot.PersistingBlock = persistingBlock ?? snapshot.PersistingBlock ?? CreateDummyBlock(snapshot);
-            ApplicationEngine engine = new ApplicationEngine(TriggerType.Application, container, snapshot, extraGAS, testMode);
+            ApplicationEngine engine = new ApplicationEngine(TriggerType.Application, container, snapshot, extraLINK, testMode);
             engine.LoadScript(script);
             engine.Execute();
             return engine;
         }
 
-        public static ApplicationEngine Run(byte[] script, IVerifiable container = null, Block persistingBlock = null, bool testMode = false, long extraGAS = default)
+        public static ApplicationEngine Run(byte[] script, IVerifiable container = null, Block persistingBlock = null, bool testMode = false, long extraLINK = default)
         {
             using (Snapshot snapshot = Blockchain.Singleton.GetSnapshot())
             {
-                return Run(script, snapshot, container, persistingBlock, testMode, extraGAS);
+                return Run(script, snapshot, container, persistingBlock, testMode, extraLINK);
             }
         }
 

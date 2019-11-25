@@ -1,12 +1,12 @@
 using System;
 
-namespace Trustlink.Wallets.NEP6
+namespace Trustlink.Wallets.TLP6
 {
     internal class WalletLocker : IDisposable
     {
-        private NEP6Wallet wallet;
+        private TLP6Wallet wallet;
 
-        public WalletLocker(NEP6Wallet wallet)
+        public WalletLocker(TLP6Wallet wallet)
         {
             this.wallet = wallet;
         }

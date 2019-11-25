@@ -14,7 +14,7 @@ namespace Trustlink.Network.P2P.Payloads
         /// <summary>
         /// CalledByEntry means that this condition must hold: EntryScriptHash == CallingScriptHash
         /// No params is needed, as the witness/permission/signature given on first invocation will automatically expire if entering deeper internal invokes
-        /// This can be default safe choice for native NEO/GAS (previously used on Neo 2 as "attach" mode)
+        /// This can be default safe choice for native TRUST/LINK (previously used on Neo 2 as "attach" mode)
         /// </summary>
         CalledByEntry = 0x01,
 

@@ -9,7 +9,9 @@ using Trustlink.SmartContract.Enumerators;
 using Trustlink.SmartContract.Iterators;
 using Trustlink.SmartContract.Manifest;
 using Trustlink.SmartContract.Native;
-using VMArray = Neo.VM.Types.Array;
+using Trustlink.VM;
+using Trustlink.VM.Types;
+using VMArray = Trustlink.VM.Types.Array;
 
 namespace Trustlink.SmartContract
 {

@@ -84,7 +84,7 @@ namespace Trustlink.Ledger
         {
             GenesisBlock.RebuildMerkleRoot();
 
-            NativeContract[] contracts = { NativeContract.GAS, NativeContract.NEO };
+            NativeContract[] contracts = { NativeContract.LINK, NativeContract.TRUST };
             using (ScriptBuilder sb = new ScriptBuilder())
             {
                 foreach (NativeContract contract in contracts)

@@ -6,12 +6,13 @@ using System.Numerics;
 using Trustlink.Ledger;
 using Trustlink.Persistence;
 using Trustlink.SmartContract.Manifest;
+using Trustlink.VM;
 using VMArray = Trustlink.VM.Types.Array;
 
 namespace Trustlink.SmartContract.Native.Tokens
 {
-    public abstract class Nep5Token<TState> : NativeContract
-        where TState : Nep5AccountState, new()
+    public abstract class Tlp5Token<TState> : NativeContract
+        where TState : Tlp5AccountState, new()
     {
         public override string[] SupportedStandards { get; } = { "TLP-5", "TLP-10" };
         public abstract string Name { get; }
@@ -22,7 +23,7 @@ namespace Trustlink.SmartContract.Native.Tokens
         protected const byte Prefix_TotalSupply = 11;
         protected const byte Prefix_Account = 20;
 
-        protected Nep5Token()
+        protected Tlp5Token()
         {
             this.Factor = BigInteger.Pow(10, Decimals);
 
@@ -153,7 +154,7 @@ namespace Trustlink.SmartContract.Native.Tokens
         {
             StorageItem storage = snapshot.Storages.TryGet(CreateAccountKey(account));
             if (storage is null) return BigInteger.Zero;
-            Nep5AccountState state = new Nep5AccountState(storage.Value);
+            Tlp5AccountState state = new Tlp5AccountState(storage.Value);
             return state.Balance;
         }
 

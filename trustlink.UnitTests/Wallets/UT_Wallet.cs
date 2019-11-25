@@ -200,20 +200,20 @@ namespace Trustlink.UnitTests.Wallets
 
             // Fake balance
             var snapshot = store.GetSnapshot();
-            var key = NativeContract.GAS.CreateStorageKey(20, account.ScriptHash);
+            var key = NativeContract.LINK.CreateStorageKey(20, account.ScriptHash);
             var entry = snapshot.Storages.GetAndChange(key, () => new StorageItem
             {
-                Value = new Nep5AccountState().ToByteArray()
+                Value = new Tlp5AccountState().ToByteArray()
             });
-            entry.Value = new Nep5AccountState()
+            entry.Value = new Tlp5AccountState()
             {
-                Balance = 10000 * NativeContract.GAS.Factor
+                Balance = 10000 * NativeContract.LINK.Factor
             }
             .ToByteArray();
 
-            wallet.GetAvailable(NativeContract.GAS.Hash).Should().Be(new BigDecimal(1000000000000, 8));
+            wallet.GetAvailable(NativeContract.LINK.Hash).Should().Be(new BigDecimal(1000000000000, 8));
 
-            entry.Value = new Nep5AccountState()
+            entry.Value = new Tlp5AccountState()
             {
                 Balance = 0
             }
@@ -230,21 +230,21 @@ namespace Trustlink.UnitTests.Wallets
 
             // Fake balance
             var snapshot = store.GetSnapshot();
-            var key = NativeContract.GAS.CreateStorageKey(20, account.ScriptHash);
+            var key = NativeContract.LINK.CreateStorageKey(20, account.ScriptHash);
             var entry = snapshot.Storages.GetAndChange(key, () => new StorageItem
             {
-                Value = new Nep5AccountState().ToByteArray()
+                Value = new Tlp5AccountState().ToByteArray()
             });
-            entry.Value = new Nep5AccountState()
+            entry.Value = new Tlp5AccountState()
             {
-                Balance = 10000 * NativeContract.GAS.Factor
+                Balance = 10000 * NativeContract.LINK.Factor
             }
             .ToByteArray();
 
             wallet.GetBalance(UInt160.Zero, new UInt160[] { account.ScriptHash }).Should().Be(new BigDecimal(0, 0));
-            wallet.GetBalance(NativeContract.GAS.Hash, new UInt160[] { account.ScriptHash }).Should().Be(new BigDecimal(1000000000000, 8));
+            wallet.GetBalance(NativeContract.LINK.Hash, new UInt160[] { account.ScriptHash }).Should().Be(new BigDecimal(1000000000000, 8));
 
-            entry.Value = new Nep5AccountState()
+            entry.Value = new Tlp5AccountState()
             {
                 Balance = 0
             }
@@ -254,19 +254,19 @@ namespace Trustlink.UnitTests.Wallets
         [TestMethod]
         public void TestGetPrivateKeyFromNEP2()
         {
-            Action action = () => Wallet.GetPrivateKeyFromNEP2(null, null, 0, 0, 0);
+            Action action = () => Wallet.GetPrivateKeyFromTLP2(null, null, 0, 0, 0);
             action.ShouldThrow<ArgumentNullException>();
 
-            action = () => Wallet.GetPrivateKeyFromNEP2("TestGetPrivateKeyFromNEP2", null, 0, 0, 0);
+            action = () => Wallet.GetPrivateKeyFromTLP2("TestGetPrivateKeyFromNEP2", null, 0, 0, 0);
             action.ShouldThrow<ArgumentNullException>();
 
-            action = () => Wallet.GetPrivateKeyFromNEP2("3vQB7B6MrGQZaxCuFg4oh", "TestGetPrivateKeyFromNEP2", 0, 0, 0);
+            action = () => Wallet.GetPrivateKeyFromTLP2("3vQB7B6MrGQZaxCuFg4oh", "TestGetPrivateKeyFromNEP2", 0, 0, 0);
             action.ShouldThrow<FormatException>();
 
-            action = () => Wallet.GetPrivateKeyFromNEP2(nep2Key, "Test", 0, 0, 0);
+            action = () => Wallet.GetPrivateKeyFromTLP2(nep2Key, "Test", 0, 0, 0);
             action.ShouldThrow<FormatException>();
 
-            Wallet.GetPrivateKeyFromNEP2(nep2Key, "pwd", 0, 0, 0).Should().BeEquivalentTo(new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31 });
+            Wallet.GetPrivateKeyFromTLP2(nep2Key, "pwd", 0, 0, 0).Should().BeEquivalentTo(new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31 });
         }
 
         [TestMethod]
@@ -307,7 +307,7 @@ namespace Trustlink.UnitTests.Wallets
             {
                 new TransferOutput()
                 {
-                     AssetId = NativeContract.GAS.Hash,
+                     AssetId = NativeContract.LINK.Hash,
                      ScriptHash = account.ScriptHash,
                      Value = new BigDecimal(1,8)
                 }
@@ -318,7 +318,7 @@ namespace Trustlink.UnitTests.Wallets
             {
                 new TransferOutput()
                 {
-                     AssetId = NativeContract.GAS.Hash,
+                     AssetId = NativeContract.LINK.Hash,
                      ScriptHash = account.ScriptHash,
                      Value = new BigDecimal(1,8)
                 }
@@ -338,25 +338,25 @@ namespace Trustlink.UnitTests.Wallets
 
             // Fake balance
             var snapshot = store.GetSnapshot();
-            var key = NativeContract.GAS.CreateStorageKey(20, account.ScriptHash);
+            var key = NativeContract.LINK.CreateStorageKey(20, account.ScriptHash);
             var entry = snapshot.Storages.GetAndChange(key, () => new StorageItem
             {
-                Value = new Nep5AccountState().ToByteArray()
+                Value = new Tlp5AccountState().ToByteArray()
             });
-            entry.Value = new Nep5AccountState()
+            entry.Value = new Tlp5AccountState()
             {
-                Balance = 10000 * NativeContract.GAS.Factor
+                Balance = 10000 * NativeContract.LINK.Factor
             }
             .ToByteArray();
 
-            key = NativeContract.NEO.CreateStorageKey(20, account.ScriptHash);
+            key = NativeContract.TRUST.CreateStorageKey(20, account.ScriptHash);
             entry = snapshot.Storages.GetAndChange(key, () => new StorageItem
             {
-                Value = new Nep5AccountState().ToByteArray()
+                Value = new Tlp5AccountState().ToByteArray()
             });
-            entry.Value = new NeoToken.AccountState()
+            entry.Value = new TrustToken.AccountState()
             {
-                Balance = 10000 * NativeContract.NEO.Factor
+                Balance = 10000 * NativeContract.TRUST.Factor
             }
             .ToByteArray();
 
@@ -364,7 +364,7 @@ namespace Trustlink.UnitTests.Wallets
             {
                 new TransferOutput()
                 {
-                     AssetId = NativeContract.GAS.Hash,
+                     AssetId = NativeContract.LINK.Hash,
                      ScriptHash = account.ScriptHash,
                      Value = new BigDecimal(1,8)
                 }
@@ -375,14 +375,14 @@ namespace Trustlink.UnitTests.Wallets
             {
                 new TransferOutput()
                 {
-                     AssetId = NativeContract.NEO.Hash,
+                     AssetId = NativeContract.TRUST.Hash,
                      ScriptHash = account.ScriptHash,
                      Value = new BigDecimal(1,8)
                 }
             });
             tx.Should().NotBeNull();
 
-            entry.Value = new NeoToken.AccountState()
+            entry.Value = new TrustToken.AccountState()
             {
                 Balance = 0
             }
@@ -402,14 +402,14 @@ namespace Trustlink.UnitTests.Wallets
 
             // Fake balance
             var snapshot = store.GetSnapshot();
-            var key = NativeContract.GAS.CreateStorageKey(20, account.ScriptHash);
+            var key = NativeContract.LINK.CreateStorageKey(20, account.ScriptHash);
             var entry = snapshot.Storages.GetAndChange(key, () => new StorageItem
             {
-                Value = new Nep5AccountState().ToByteArray()
+                Value = new Tlp5AccountState().ToByteArray()
             });
-            entry.Value = new Nep5AccountState()
+            entry.Value = new Tlp5AccountState()
             {
-                Balance = 1000000 * NativeContract.GAS.Factor
+                Balance = 1000000 * NativeContract.LINK.Factor
             }
             .ToByteArray();
 
@@ -419,7 +419,7 @@ namespace Trustlink.UnitTests.Wallets
             tx = wallet.MakeTransaction(new byte[] { }, null, new TransactionAttribute[] { });
             tx.Should().NotBeNull();
 
-            entry.Value = new NeoToken.AccountState()
+            entry.Value = new TrustToken.AccountState()
             {
                 Balance = 0
             }

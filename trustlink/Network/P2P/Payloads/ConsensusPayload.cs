@@ -97,7 +97,7 @@ namespace Trustlink.Network.P2P.Payloads
 
         UInt160[] IVerifiable.GetScriptHashesForVerifying(Snapshot snapshot)
         {
-            ECPoint[] validators = NativeContract.NEO.GetNextBlockValidators(snapshot);
+            ECPoint[] validators = NativeContract.TRUST.GetNextBlockValidators(snapshot);
             if (validators.Length <= ValidatorIndex)
                 throw new InvalidOperationException();
             return new[] { Contract.CreateSignatureRedeemScript(validators[ValidatorIndex]).ToScriptHash() };

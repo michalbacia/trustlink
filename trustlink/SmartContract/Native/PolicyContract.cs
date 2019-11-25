@@ -9,7 +9,8 @@ using Trustlink.Ledger;
 using Trustlink.Network.P2P.Payloads;
 using Trustlink.Persistence;
 using Trustlink.SmartContract.Manifest;
-using VMArray = Neo.VM.Types.Array;
+using Trustlink.VM;
+using VMArray = Trustlink.VM.Types.Array;
 
 namespace Trustlink.SmartContract.Native
 {

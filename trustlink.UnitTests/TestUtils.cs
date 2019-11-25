@@ -6,7 +6,8 @@ using Trustlink.IO.Json;
 using Trustlink.Ledger;
 using Trustlink.Network.P2P.Payloads;
 using Trustlink.SmartContract.Manifest;
-using Trustlink.Wallets.NEP6;
+using Trustlink.VM;
+using Trustlink.Wallets.TLP6;
 
 namespace Trustlink.UnitTests
 {
@@ -25,7 +26,7 @@ namespace Trustlink.UnitTests
             return array;
         }
 
-        public static NEP6Wallet GenerateTestWallet()
+        public static TLP6Wallet GenerateTestWallet()
         {
             JObject wallet = new JObject();
             wallet["name"] = "noname";
@@ -34,7 +35,7 @@ namespace Trustlink.UnitTests
             wallet["accounts"] = new JArray();
             wallet["extra"] = null;
             wallet.ToString().Should().Be("{\"name\":\"noname\",\"version\":\"0.0\",\"scrypt\":{\"n\":0,\"r\":0,\"p\":0},\"accounts\":[],\"extra\":null}");
-            return new NEP6Wallet(wallet);
+            return new TLP6Wallet(wallet);
         }
 
         public static Transaction GetTransaction()

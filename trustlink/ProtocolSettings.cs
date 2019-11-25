@@ -44,20 +44,20 @@ namespace Trustlink
         private ProtocolSettings(IConfigurationSection section)
         {
             this.Magic = section.GetValue("Magic", 0x4F454Eu);
-            this.AddressVersion = section.GetValue("AddressVersion", (byte)0x17);
+            this.AddressVersion = section.GetValue("AddressVersion", (byte)0x41);
             IConfigurationSection section_sv = section.GetSection("StandbyValidators");
             if (section_sv.Exists())
                 this.StandbyValidators = section_sv.GetChildren().Select(p => p.Get<string>()).ToArray();
             else
                 this.StandbyValidators = new[]
                 {
-                    "03b209fd4f53a7170ea4444e0cb0a6bb6a53c2bd016926989cf85f9b0fba17a70c",
-                    "02df48f60e8f3e01c48ff40b9b7f1310d7a8b2a193188befe1c2e3df740e895093",
-                    "03b8d9d5771d8f513aa0869b9cc8d50986403b78c6da36890638c3d46a5adce04a",
-                    "02ca0e27697b9c248f6f16e085fd0061e26f44da85b58ee835c110caa5ec3ba554",
-                    "024c7b7fb6c310fccf1ba33b082519d82964ea93868d676662d4a59ad548df0e7d",
-                    "02aaec38470f6aad0042c6e877cfd8087d2676b0f516fddd362801b9bd3936399e",
-                    "02486fd15702c4490a26703112a5cc1d0923fd697a33406bd5a1c00e0013b09a70"
+                    "02466d6d8851ce461fce2f04a790e616c71a1959af3beda65178329297555115a8",
+                    "0398ed0f590705cb99bd85a3348cb1e204a07e33ca2d1f34d9684314bea2fbfbfe",
+                    "029d012be2c28defd95ab3b3585ca24f38606140362bb4818e0d143829ce8afda1",
+                    "03b470cbaa92efc669a73e5eaa05c60d69fbc9a28511594ec8eb5bf850f2a4419c",
+                    "0339bf71916d954d8361063160c210d9b8ce130b884c63cb2e2bcbbca16fced245"
+
+
                 };
             IConfigurationSection section_sl = section.GetSection("SeedList");
             if (section_sl.Exists())
@@ -65,11 +65,10 @@ namespace Trustlink
             else
                 this.SeedList = new[]
                 {
-                    "seed1.neo.org:10333",
-                    "seed2.neo.org:10333",
-                    "seed3.neo.org:10333",
-                    "seed4.neo.org:10333",
-                    "seed5.neo.org:10333"
+                    "seed1.trustlink.tech:2011",
+                    "seed2.trustlink.tech:2011",
+                    "seed3.trustlink.tech:2011",
+                    "seed4.trustlink.tech:2011"
                 };
             this.MillisecondsPerBlock = section.GetValue("MillisecondsPerBlock", 15000u);
             this.MemoryPoolMaxTransactions = Math.Max(1, section.GetValue("MemoryPoolMaxTransactions", 50_000));

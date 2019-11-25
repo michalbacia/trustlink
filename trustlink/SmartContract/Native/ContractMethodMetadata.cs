@@ -1,5 +1,6 @@
 using System;
-using VMArray = Neo.VM.Types.Array;
+using Trustlink.VM;
+using VMArray = Trustlink.VM.Types.Array;
 
 namespace Trustlink.SmartContract.Native
 {

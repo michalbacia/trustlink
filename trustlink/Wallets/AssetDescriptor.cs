@@ -1,5 +1,6 @@
 using System;
 using Trustlink.SmartContract;
+using Trustlink.VM;
 
 namespace Trustlink.Wallets
 {
@@ -18,7 +19,7 @@ namespace Trustlink.Wallets
                 sb.EmitAppCall(asset_id, "name");
                 script = sb.ToArray();
             }
-            ApplicationEngine engine = ApplicationEngine.Run(script, extraGAS: 3_000_000);
+            ApplicationEngine engine = ApplicationEngine.Run(script, extraLINK: 3_000_000);
             if (engine.State.HasFlag(VMState.FAULT)) throw new ArgumentException();
             this.AssetId = asset_id;
             this.AssetName = engine.ResultStack.Pop().GetString();

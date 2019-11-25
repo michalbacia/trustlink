@@ -3,17 +3,18 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Trustlink.Cryptography;
 using Trustlink.IO.Json;
 using Trustlink.Wallets;
-using Trustlink.Wallets.NEP6;
+using Trustlink.Wallets.TLP6;
 
-namespace Trustlink.UnitTests.Wallets.NEP6
+
+namespace Trustlink.UnitTests.Wallets.TLP6
 {
     [TestClass]
-    public class UT_NEP6Account
+    public class UT_TLP6Account
     {
-        NEP6Account account;
+        TLP6Account account;
         UInt160 hash;
-        NEP6Wallet wallet;
-        private static string nep2;
+        TLP6Wallet wallet;
+        private static string tlp2;
         private static KeyPair keyPair;
 
         [ClassInitialize]
@@ -22,7 +23,7 @@ namespace Trustlink.UnitTests.Wallets.NEP6
             byte[] privateKey = { 0x01,0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01,
                 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01};
             keyPair = new KeyPair(privateKey);
-            nep2 = keyPair.Export("Satoshi", 0, 0, 0);
+            tlp2 = keyPair.Export("Satoshi", 0, 0, 0);
         }
 
         [TestInitialize]
@@ -31,7 +32,7 @@ namespace Trustlink.UnitTests.Wallets.NEP6
             wallet = TestUtils.GenerateTestWallet();
             byte[] array1 = { 0x01 };
             hash = new UInt160(Crypto.Default.Hash160(array1));
-            account = new NEP6Account(wallet, hash);
+            account = new TLP6Account(wallet, hash);
         }
 
         [TestMethod]
@@ -45,11 +46,11 @@ namespace Trustlink.UnitTests.Wallets.NEP6
         [TestMethod]
         public void TestConstructorWithKeyPair()
         {
-            NEP6Wallet wallet = new NEP6Wallet("a");
+            TLP6Wallet wallet = new TLP6Wallet("a");
             byte[] array1 = { 0x01 };
             var hash = new UInt160(Crypto.Default.Hash160(array1));
             string password = "hello world";
-            NEP6Account account = new NEP6Account(wallet, hash, keyPair, password);
+            var account = new TLP6Account(wallet, hash, keyPair, password);
             account.ScriptHash.Should().Be(hash);
             account.Decrypted.Should().BeTrue();
             account.HasKey.Should().BeTrue();
@@ -66,7 +67,7 @@ namespace Trustlink.UnitTests.Wallets.NEP6
             json["lock"] = false;
             json["contract"] = null;
             json["extra"] = null;
-            NEP6Account account = NEP6Account.FromJson(json, wallet);
+            var account = TLP6Account.FromJson(json, wallet);
             account.ScriptHash.Should().Be("ARxgjcH2K1yeW5f5ryuRQNaBzSa9TZzmVS".ToScriptHash());
             account.Label.Should().BeNull();
             account.IsDefault.Should().BeTrue();
@@ -77,7 +78,7 @@ namespace Trustlink.UnitTests.Wallets.NEP6
 
             json["key"] = "6PYRjVE1gAbCRyv81FTiFz62cxuPGw91vMjN4yPa68bnoqJtioreTznezn";
             json["label"] = "label";
-            account = NEP6Account.FromJson(json, wallet);
+            account = TLP6Account.FromJson(json, wallet);
             account.Label.Should().Be("label");
             account.HasKey.Should().BeTrue();
         }
@@ -87,7 +88,7 @@ namespace Trustlink.UnitTests.Wallets.NEP6
         {
             account.GetKey().Should().BeNull();
             wallet.Unlock("Satoshi");
-            account = new NEP6Account(wallet, hash, nep2);
+            account = new TLP6Account(wallet, hash, tlp2);
             account.GetKey().Should().Be(keyPair);
         }
 
@@ -95,7 +96,7 @@ namespace Trustlink.UnitTests.Wallets.NEP6
         public void TestGetKeyWithString()
         {
             account.GetKey("Satoshi").Should().BeNull();
-            account = new NEP6Account(wallet, hash, nep2);
+            account = new TLP6Account(wallet, hash, tlp2);
             account.GetKey("Satoshi").Should().Be(keyPair);
         }
 
@@ -113,7 +114,7 @@ namespace Trustlink.UnitTests.Wallets.NEP6
             };
             nep6contract["parameters"] = array;
             nep6contract["deployed"] = false;
-            account.Contract = NEP6Contract.FromJson(nep6contract);
+            account.Contract = TLP6Contract.FromJson(nep6contract);
             JObject json = account.ToJson();
             json["address"].Should().Equals("AZk5bAanTtD6AvpeesmYgL8CLRYUt5JQsX");
             json["label"].Should().BeNull();
@@ -131,7 +132,7 @@ namespace Trustlink.UnitTests.Wallets.NEP6
         [TestMethod]
         public void TestVerifyPassword()
         {
-            account = new NEP6Account(wallet, hash, nep2);
+            account = new TLP6Account(wallet, hash, tlp2);
             account.VerifyPassword("Satoshi").Should().BeTrue();
             account.VerifyPassword("b").Should().BeFalse();
         }

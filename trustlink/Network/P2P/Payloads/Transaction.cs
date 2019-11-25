@@ -30,7 +30,7 @@ namespace Trustlink.Network.P2P.Payloads
         public uint Nonce;
         public UInt160 Sender;
         /// <summary>
-        /// Distributed to NEO holders.
+        /// Distributed to TRUST holders.
         /// </summary>
         public long SystemFee;
         /// <summary>
@@ -92,7 +92,7 @@ namespace Trustlink.Network.P2P.Payloads
             Sender = reader.ReadSerializable<UInt160>();
             SystemFee = reader.ReadInt64();
             if (SystemFee < 0) throw new FormatException();
-            if (SystemFee % NativeContract.GAS.Factor != 0) throw new FormatException();
+            if (SystemFee % NativeContract.LINK.Factor != 0) throw new FormatException();
             NetworkFee = reader.ReadInt64();
             if (NetworkFee < 0) throw new FormatException();
             if (SystemFee + NetworkFee < SystemFee) throw new FormatException();
@@ -134,7 +134,7 @@ namespace Trustlink.Network.P2P.Payloads
                 return false;
             if (NativeContract.Policy.GetBlockedAccounts(snapshot).Intersect(GetScriptHashesForVerifying(snapshot)).Count() > 0)
                 return false;
-            BigInteger balance = NativeContract.GAS.BalanceOf(snapshot, Sender);
+            BigInteger balance = NativeContract.LINK.BalanceOf(snapshot, Sender);
             BigInteger fee = SystemFee + NetworkFee;
             if (balance < fee) return false;
             fee += mempool.Where(p => p != this && p.Sender.Equals(Sender)).Select(p => (BigInteger)(p.SystemFee + p.NetworkFee)).Sum();

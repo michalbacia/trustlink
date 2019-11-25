@@ -10,13 +10,15 @@ using Trustlink.Cryptography.ECC;
 using Trustlink.IO;
 using Trustlink.Ledger;
 using Trustlink.Persistence;
+using Trustlink.VM;
+using Trustlink.VM.Types;
 using VMArray = Trustlink.VM.Types.Array;
 
 namespace Trustlink.SmartContract.Native.Tokens
 {
-    public sealed class TrustToken : Nep5Token<TrustToken.AccountState>
+    public sealed class TrustToken : Tlp5Token<TrustToken.AccountState>
     {
-        public override string ServiceName => "Trustlink.Native.Tokens.NEO";
+        public override string ServiceName => "Trustlink.Native.Tokens.TRUST";
         public override string Name => "TRUST";
         public override string Symbol => "trst";
         public override byte Decimals => 8;
@@ -58,7 +60,7 @@ namespace Trustlink.SmartContract.Native.Tokens
         {
             BigInteger gas = CalculateBonus(engine.Snapshot, state.Balance, state.BalanceHeight, engine.Snapshot.PersistingBlock.Index);
             state.BalanceHeight = engine.Snapshot.PersistingBlock.Index;
-            GAS.Mint(engine, account, gas);
+            LINK.Mint(engine, account, gas);
             engine.Snapshot.Storages.GetAndChange(CreateAccountKey(account)).Value = state.ToByteArray();
         }
 
@@ -91,8 +93,8 @@ namespace Trustlink.SmartContract.Native.Tokens
                 }
                 amount += (iend - istart) * Blockchain.GenerationAmount[ustart];
             }
-            amount += (GAS.GetSysFeeAmount(snapshot, end - 1) - (start == 0 ? 0 : GAS.GetSysFeeAmount(snapshot, start - 1))) / GAS.Factor;
-            return value * amount * GAS.Factor / TotalAmount;
+            amount += (LINK.GetSysFeeAmount(snapshot, end - 1) - (start == 0 ? 0 : LINK.GetSysFeeAmount(snapshot, start - 1))) / LINK.Factor;
+            return value * amount * LINK.Factor / TotalAmount;
         }
 
         internal override bool Initialize(ApplicationEngine engine)
@@ -245,7 +247,7 @@ namespace Trustlink.SmartContract.Native.Tokens
             return storage.Value.AsSerializableArray<ECPoint>();
         }
 
-        public class AccountState : Nep5AccountState
+        public class AccountState : Tlp5AccountState
         {
             public uint BalanceHeight;
             public ECPoint[] Votes;

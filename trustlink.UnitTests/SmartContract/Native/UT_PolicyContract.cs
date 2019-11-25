@@ -67,7 +67,7 @@ namespace Trustlink.UnitTests.SmartContract.Native
 
             // Without signature
 
-            var ret = NativeContract.Policy.Call(snapshot, new Nep5NativeContractExtensions.ManualWitness(null),
+            var ret = NativeContract.Policy.Call(snapshot, new Tlp5NativeContractExtensions.ManualWitness(null),
                 "setMaxBlockSize", new ContractParameter(ContractParameterType.Integer) { Value = 1024 });
             ret.Should().BeOfType<VM.Types.Boolean>();
             ret.GetBoolean().Should().BeFalse();
@@ -78,7 +78,7 @@ namespace Trustlink.UnitTests.SmartContract.Native
 
             // More than expected
 
-            ret = NativeContract.Policy.Call(snapshot, new Nep5NativeContractExtensions.ManualWitness(UInt160.Zero),
+            ret = NativeContract.Policy.Call(snapshot, new Tlp5NativeContractExtensions.ManualWitness(UInt160.Zero),
                  "setMaxBlockSize", new ContractParameter(ContractParameterType.Integer) { Value = Message.PayloadMaxSize });
             ret.Should().BeOfType<VM.Types.Boolean>();
             ret.GetBoolean().Should().BeFalse();
@@ -89,7 +89,7 @@ namespace Trustlink.UnitTests.SmartContract.Native
 
             // With signature
 
-            ret = NativeContract.Policy.Call(snapshot, new Nep5NativeContractExtensions.ManualWitness(UInt160.Zero),
+            ret = NativeContract.Policy.Call(snapshot, new Tlp5NativeContractExtensions.ManualWitness(UInt160.Zero),
                 "setMaxBlockSize", new ContractParameter(ContractParameterType.Integer) { Value = 1024 });
             ret.Should().BeOfType<VM.Types.Boolean>();
             ret.GetBoolean().Should().BeTrue();
@@ -113,7 +113,7 @@ namespace Trustlink.UnitTests.SmartContract.Native
 
             // Without signature
 
-            var ret = NativeContract.Policy.Call(snapshot, new Nep5NativeContractExtensions.ManualWitness(),
+            var ret = NativeContract.Policy.Call(snapshot, new Tlp5NativeContractExtensions.ManualWitness(),
                 "setMaxTransactionsPerBlock", new ContractParameter(ContractParameterType.Integer) { Value = 1 });
             ret.Should().BeOfType<VM.Types.Boolean>();
             ret.GetBoolean().Should().BeFalse();
@@ -124,7 +124,7 @@ namespace Trustlink.UnitTests.SmartContract.Native
 
             // With signature
 
-            ret = NativeContract.Policy.Call(snapshot, new Nep5NativeContractExtensions.ManualWitness(UInt160.Zero),
+            ret = NativeContract.Policy.Call(snapshot, new Tlp5NativeContractExtensions.ManualWitness(UInt160.Zero),
                 "setMaxTransactionsPerBlock", new ContractParameter(ContractParameterType.Integer) { Value = 1 });
             ret.Should().BeOfType<VM.Types.Boolean>();
             ret.GetBoolean().Should().BeTrue();
@@ -148,7 +148,7 @@ namespace Trustlink.UnitTests.SmartContract.Native
 
             // Without signature
 
-            var ret = NativeContract.Policy.Call(snapshot, new Nep5NativeContractExtensions.ManualWitness(),
+            var ret = NativeContract.Policy.Call(snapshot, new Tlp5NativeContractExtensions.ManualWitness(),
                 "setFeePerByte", new ContractParameter(ContractParameterType.Integer) { Value = 1 });
             ret.Should().BeOfType<VM.Types.Boolean>();
             ret.GetBoolean().Should().BeFalse();
@@ -159,7 +159,7 @@ namespace Trustlink.UnitTests.SmartContract.Native
 
             // With signature
 
-            ret = NativeContract.Policy.Call(snapshot, new Nep5NativeContractExtensions.ManualWitness(UInt160.Zero),
+            ret = NativeContract.Policy.Call(snapshot, new Tlp5NativeContractExtensions.ManualWitness(UInt160.Zero),
                 "setFeePerByte", new ContractParameter(ContractParameterType.Integer) { Value = 1 });
             ret.Should().BeOfType<VM.Types.Boolean>();
             ret.GetBoolean().Should().BeTrue();
@@ -183,7 +183,7 @@ namespace Trustlink.UnitTests.SmartContract.Native
 
             // Block without signature
 
-            var ret = NativeContract.Policy.Call(snapshot, new Nep5NativeContractExtensions.ManualWitness(),
+            var ret = NativeContract.Policy.Call(snapshot, new Tlp5NativeContractExtensions.ManualWitness(),
                 "blockAccount", new ContractParameter(ContractParameterType.Hash160) { Value = UInt160.Zero });
             ret.Should().BeOfType<VM.Types.Boolean>();
             ret.GetBoolean().Should().BeFalse();
@@ -194,7 +194,7 @@ namespace Trustlink.UnitTests.SmartContract.Native
 
             // Block with signature
 
-            ret = NativeContract.Policy.Call(snapshot, new Nep5NativeContractExtensions.ManualWitness(UInt160.Zero),
+            ret = NativeContract.Policy.Call(snapshot, new Tlp5NativeContractExtensions.ManualWitness(UInt160.Zero),
                 "blockAccount", new ContractParameter(ContractParameterType.Hash160) { Value = UInt160.Zero });
             ret.Should().BeOfType<VM.Types.Boolean>();
             ret.GetBoolean().Should().BeTrue();
@@ -206,7 +206,7 @@ namespace Trustlink.UnitTests.SmartContract.Native
 
             // Unblock without signature
 
-            ret = NativeContract.Policy.Call(snapshot, new Nep5NativeContractExtensions.ManualWitness(),
+            ret = NativeContract.Policy.Call(snapshot, new Tlp5NativeContractExtensions.ManualWitness(),
                 "unblockAccount", new ContractParameter(ContractParameterType.Hash160) { Value = UInt160.Zero });
             ret.Should().BeOfType<VM.Types.Boolean>();
             ret.GetBoolean().Should().BeFalse();
@@ -218,7 +218,7 @@ namespace Trustlink.UnitTests.SmartContract.Native
 
             // Unblock with signature
 
-            ret = NativeContract.Policy.Call(snapshot, new Nep5NativeContractExtensions.ManualWitness(UInt160.Zero),
+            ret = NativeContract.Policy.Call(snapshot, new Tlp5NativeContractExtensions.ManualWitness(UInt160.Zero),
                 "unblockAccount", new ContractParameter(ContractParameterType.Hash160) { Value = UInt160.Zero });
             ret.Should().BeOfType<VM.Types.Boolean>();
             ret.GetBoolean().Should().BeTrue();

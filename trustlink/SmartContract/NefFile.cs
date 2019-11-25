@@ -22,7 +22,7 @@ namespace Trustlink.SmartContract
     public class NefFile : ISerializable
     {
         /// <summary>
-        /// NEO Executable Format 3 (NEF3)
+        /// TRUST Executable Format 3 (NEF3)
         /// </summary>
         private const uint Magic = 0x3346454E;
 

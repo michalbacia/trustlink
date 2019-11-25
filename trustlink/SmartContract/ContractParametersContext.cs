@@ -9,6 +9,7 @@ using Trustlink.IO.Json;
 using Trustlink.Ledger;
 using Trustlink.Network.P2P.Payloads;
 using Trustlink.Persistence;
+using Trustlink.VM;
 
 namespace Trustlink.SmartContract
 {

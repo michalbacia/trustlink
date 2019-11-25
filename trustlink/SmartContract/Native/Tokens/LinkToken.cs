@@ -12,7 +12,7 @@ using VMArray = Trustlink.VM.Types.Array;
 
 namespace Trustlink.SmartContract.Native.Tokens
 {
-    public sealed class LinkToken : Nep5Token<Nep5AccountState>
+    public sealed class LinkToken : Tlp5Token<Tlp5AccountState>
     {
         public override string ServiceName => "Trustlink.Native.Tokens.LINK";
         public override string Name => "LINK";

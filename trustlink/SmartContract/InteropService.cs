@@ -135,7 +135,7 @@ namespace Trustlink.SmartContract
 
         private static bool Runtime_Platform(ApplicationEngine engine)
         {
-            engine.CurrentContext.EvaluationStack.Push(Encoding.ASCII.GetBytes("NEO"));
+            engine.CurrentContext.EvaluationStack.Push(Encoding.ASCII.GetBytes("TRUST"));
             return true;
         }
 

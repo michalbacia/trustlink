@@ -12,7 +12,7 @@ using Trustlink.SmartContract.Native;
 namespace Trustlink.UnitTests.SmartContract.Native.Tokens
 {
     [TestClass]
-    public class UT_GasToken
+    public class UT_LinkToken
     {
         Store Store;
 
@@ -24,7 +24,7 @@ namespace Trustlink.UnitTests.SmartContract.Native.Tokens
         }
 
         [TestMethod]
-        public void Check_Name() => NativeContract.GAS.Name().Should().Be("GAS");
+        public void Check_Name() => NativeContract.LINK.Name().Should().Be("GAS");
 
         [TestMethod]
         public void Check_Symbol() => NativeContract.GAS.Symbol().Should().Be("gas");

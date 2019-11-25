@@ -24,6 +24,7 @@ using Trustlink.Persistence;
 using Trustlink.Plugins;
 using Trustlink.SmartContract;
 using Trustlink.SmartContract.Native;
+using Trustlink.VM;
 using Trustlink.Wallets;
 
 namespace Trustlink.Network.RPC
@@ -110,7 +111,7 @@ namespace Trustlink.Network.RPC
 
         private JObject GetInvokeResult(byte[] script, IVerifiable checkWitnessHashes = null)
         {
-            ApplicationEngine engine = ApplicationEngine.Run(script, checkWitnessHashes, extraGAS: MaxGasInvoke);
+            ApplicationEngine engine = ApplicationEngine.Run(script, checkWitnessHashes, extraLINK: MaxGasInvoke);
             JObject json = new JObject();
             json["script"] = script.ToHexString();
             json["state"] = engine.State;
@@ -501,7 +502,7 @@ namespace Trustlink.Network.RPC
         private JObject GetBlockSysFee(uint height)
         {
             if (height <= Blockchain.Singleton.Height)
-                using (ApplicationEngine engine = NativeContract.GAS.TestCall("getSysFeeAmount", height))
+                using (ApplicationEngine engine = NativeContract.LINK.TestCall("getSysFeeAmount", height))
                 {
                     return engine.ResultStack.Peek().GetBigInteger().ToString();
                 }
@@ -597,8 +598,8 @@ namespace Trustlink.Network.RPC
         {
             using (Snapshot snapshot = Blockchain.Singleton.GetSnapshot())
             {
-                var validators = NativeContract.NEO.GetValidators(snapshot);
-                return NativeContract.NEO.GetRegisteredValidators(snapshot).Select(p =>
+                var validators = NativeContract.TRUST.GetValidators(snapshot);
+                return NativeContract.TRUST.GetRegisteredValidators(snapshot).Select(p =>
                 {
                     JObject validator = new JObject();
                     validator["publickey"] = p.PublicKey.ToString();

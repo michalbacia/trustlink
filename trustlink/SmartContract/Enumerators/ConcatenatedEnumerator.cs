@@ -1,3 +1,5 @@
+using Trustlink.VM;
+
 namespace Trustlink.SmartContract.Enumerators
 {
     internal class ConcatenatedEnumerator : IEnumerator

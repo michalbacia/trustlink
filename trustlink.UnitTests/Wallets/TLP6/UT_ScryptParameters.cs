@@ -1,9 +1,9 @@
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Trustlink.IO.Json;
-using Trustlink.Wallets.NEP6;
+using Trustlink.Wallets.TLP6;
 
-namespace Trustlink.UnitTests.Wallets.NEP6
+namespace Trustlink.UnitTests.Wallets.TLP6
 {
     [TestClass]
     public class UT_ScryptParameters

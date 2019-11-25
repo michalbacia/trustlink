@@ -2,13 +2,15 @@ using System;
 using System.IO;
 using System.Numerics;
 using System.Text;
+using FluentAssertions;
 using Trustlink.Network.P2P.Payloads;
 using Trustlink.SmartContract;
 using Trustlink.SmartContract.Native;
+using Trustlink.VM;
 
 namespace Trustlink.UnitTests.Extensions
 {
-    public static class Nep5NativeContractExtensions
+    public static class Tlp5NativeContractExtensions
     {
         internal class ManualWitness : IVerifiable
         {
