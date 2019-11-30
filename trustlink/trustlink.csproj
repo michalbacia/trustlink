@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Copyright>2019 Applied Economics Ltd.</Copyright>
     <AssemblyTitle>Trustlink</AssemblyTitle>
-    <Version>1.2.0</Version>
+    <Version>1.3.0</Version>
     <Authors>The Trustlink Project</Authors>
     <TargetFrameworks>netstandard2.0;net47</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -19,8 +19,8 @@
     <Description>Trustlink</Description>
     <LangVersion>latest</LangVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <AssemblyVersion>1.2.0.0</AssemblyVersion>
-    <FileVersion>1.2.0.0</FileVersion>
+    <AssemblyVersion>1.3.0.0</AssemblyVersion>
+    <FileVersion>1.3.0.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>

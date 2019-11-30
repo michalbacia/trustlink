@@ -43,7 +43,7 @@ namespace Trustlink
 
         private ProtocolSettings(IConfigurationSection section)
         {
-            this.Magic = section.GetValue("Magic", 0x4F454Eu);
+            this.Magic = section.GetValue("Magic", 0x658AC5‬);
             this.AddressVersion = section.GetValue("AddressVersion", (byte)0x41);
             IConfigurationSection section_sv = section.GetSection("StandbyValidators");
             if (section_sv.Exists())
