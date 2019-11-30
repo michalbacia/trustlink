@@ -51,11 +51,11 @@ namespace Trustlink
             else
                 this.StandbyValidators = new[]
                 {
-                    "02466d6d8851ce461fce2f04a790e616c71a1959af3beda65178329297555115a8",
-                    "0398ed0f590705cb99bd85a3348cb1e204a07e33ca2d1f34d9684314bea2fbfbfe",
-                    "029d012be2c28defd95ab3b3585ca24f38606140362bb4818e0d143829ce8afda1",
-                    "03b470cbaa92efc669a73e5eaa05c60d69fbc9a28511594ec8eb5bf850f2a4419c",
-                    "0339bf71916d954d8361063160c210d9b8ce130b884c63cb2e2bcbbca16fced245"
+                    "022238a1c7a47d7b2f8224bbb45ce6f384ba457b7c53ef034f2d6caa4ed98c72c0",
+                    "02becba1549d34180818d402036ef7c91270fc95564f63e8d00e0db962f1f239be",
+                    "02b9a6abac3e886686b27d986f7c3911ebacb902dac500b18d977baa3a928b2aa7",
+                    "03b2ece5dabb96009740d3d766dbb67e08f72bb0ee01ea0a3c09a038d7159595a7",
+                    "02ea3415771494c8b99646a58debe3ab2a07c7a9ce85be5d5dfda440e6ce11fb84"
 
 
                 };
