@@ -85,9 +85,9 @@ namespace Trustlink
         }
 
         public void StartRpc(IPAddress bindAddress, int port, Wallet wallet = null, string sslCert = null, string password = null,
-            string[] trustedAuthorities = null, long maxGasInvoke = default)
+            string[] trustedAuthorities = null, long maxLinkInvoke = default)
         {
-            RpcServer = new RpcServer(this, wallet, maxGasInvoke);
+            RpcServer = new RpcServer(this, wallet, maxLinkInvoke);
             RpcServer.Start(bindAddress, port, sslCert, password, trustedAuthorities);
         }
 

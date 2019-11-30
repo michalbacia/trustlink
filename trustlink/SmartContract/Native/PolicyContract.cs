@@ -16,7 +16,7 @@ namespace Trustlink.SmartContract.Native
 {
     public sealed class PolicyContract : NativeContract
     {
-        public override string ServiceName => "Neo.Native.Policy";
+        public override string ServiceName => "Trustlink.Native.Policy";
 
         private const byte Prefix_MaxTransactionsPerBlock = 23;
         private const byte Prefix_FeePerByte = 10;

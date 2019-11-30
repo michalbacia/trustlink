@@ -67,7 +67,7 @@ namespace Trustlink.SmartContract
                     sb.EmitPush(publicKey.EncodePoint(true));
                 }
                 sb.EmitPush(publicKeys.Length);
-                sb.EmitSysCall(InteropService.Neo_Crypto_CheckMultiSig);
+                sb.EmitSysCall(InteropService.Trustlink_Crypto_CheckMultiSig);
                 return sb.ToArray();
             }
         }
@@ -86,7 +86,7 @@ namespace Trustlink.SmartContract
             using (ScriptBuilder sb = new ScriptBuilder())
             {
                 sb.EmitPush(publicKey.EncodePoint(true));
-                sb.EmitSysCall(InteropService.Neo_Crypto_CheckSig);
+                sb.EmitSysCall(InteropService.Trustlink_Crypto_CheckSig);
                 return sb.ToArray();
             }
         }

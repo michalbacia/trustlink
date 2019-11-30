@@ -317,7 +317,7 @@ namespace Trustlink.Wallets
                 {
                     if (engine.State.HasFlag(VMState.FAULT))
                         throw new InvalidOperationException($"Failed execution for '{script.ToHexString()}'");
-                    tx.SystemFee = Math.Max(engine.GasConsumed - ApplicationEngine.LinkFree, 0);
+                    tx.SystemFee = Math.Max(engine.LinkConsumed - ApplicationEngine.LinkFree, 0);
                     if (tx.SystemFee > 0)
                     {
                         long d = (long)NativeContract.LINK.Factor;
@@ -341,7 +341,7 @@ namespace Trustlink.Wallets
                     if (witness_script.IsSignatureContract())
                     {
                         size += 66 + witness_script.GetVarSize();
-                        tx.NetworkFee += ApplicationEngine.OpCodePrices[OpCode.PUSHBYTES64] + ApplicationEngine.OpCodePrices[OpCode.PUSHBYTES33] + InteropService.GetPrice(InteropService.Neo_Crypto_CheckSig, null);
+                        tx.NetworkFee += ApplicationEngine.OpCodePrices[OpCode.PUSHBYTES64] + ApplicationEngine.OpCodePrices[OpCode.PUSHBYTES33] + InteropService.GetPrice(InteropService.Trustlink_Crypto_CheckSig, null);
                     }
                     else if (witness_script.IsMultiSigContract(out int m, out int n))
                     {
@@ -353,7 +353,7 @@ namespace Trustlink.Wallets
                         tx.NetworkFee += ApplicationEngine.OpCodePrices[OpCode.PUSHBYTES33] * n;
                         using (ScriptBuilder sb = new ScriptBuilder())
                             tx.NetworkFee += ApplicationEngine.OpCodePrices[(OpCode)sb.EmitPush(n).ToArray()[0]];
-                        tx.NetworkFee += InteropService.GetPrice(InteropService.Neo_Crypto_CheckSig, null) * n;
+                        tx.NetworkFee += InteropService.GetPrice(InteropService.Trustlink_Crypto_CheckSig, null) * n;
                     }
                     else
                     {

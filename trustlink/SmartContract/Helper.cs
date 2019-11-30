@@ -153,7 +153,7 @@ namespace Trustlink.SmartContract
             }
             if (script[i++] != (byte)OpCode.SYSCALL) return false;
             if (script.Length != i + 4) return false;
-            if (BitConverter.ToUInt32(script, i) != InteropService.Neo_Crypto_CheckMultiSig)
+            if (BitConverter.ToUInt32(script, i) != InteropService.Trustlink_Crypto_CheckMultiSig)
                 return false;
             return true;
         }
@@ -163,7 +163,7 @@ namespace Trustlink.SmartContract
             if (script.Length != 39) return false;
             if (script[0] != (byte)OpCode.PUSHBYTES33
                 || script[34] != (byte)OpCode.SYSCALL
-                || BitConverter.ToUInt32(script, 35) != InteropService.Neo_Crypto_CheckSig)
+                || BitConverter.ToUInt32(script, 35) != InteropService.Trustlink_Crypto_CheckSig)
                 return false;
             return true;
         }

@@ -12,8 +12,8 @@ namespace Trustlink.Network.RPC.Models
         [JsonProperty(PropertyName = "state")]
         public string State { get; set; }
 
-        [JsonProperty(PropertyName = "gas_consumed")]
-        public string GasConsumed { get; set; }
+        [JsonProperty(PropertyName = "link_consumed")]
+        public string LinkConsumed { get; set; }
 
         [JsonProperty(PropertyName = "stack")]
         public RpcStack[] Stack { get; set; }
@@ -26,7 +26,7 @@ namespace Trustlink.Network.RPC.Models
             JObject json = new JObject();
             json["script"] = Script;
             json["state"] = State;
-            json["gas_consumed"] = GasConsumed;
+            json["link_consumed"] = LinkConsumed;
             json["stack"] = new JArray(Stack.Select(p => p.ToJson()));
             json["tx"] = Tx;
             return json;
@@ -37,7 +37,7 @@ namespace Trustlink.Network.RPC.Models
             RpcInvokeResult invokeScriptResult = new RpcInvokeResult();
             invokeScriptResult.Script = json["script"].AsString();
             invokeScriptResult.State = json["state"].AsString();
-            invokeScriptResult.GasConsumed = json["gas_consumed"].AsString();
+            invokeScriptResult.LinkConsumed = json["link_consumed"].AsString();
             invokeScriptResult.Tx = json["tx"].AsString();
             invokeScriptResult.Stack = ((JArray)json["stack"]).Select(p => RpcStack.FromJson(p)).ToArray();
             return invokeScriptResult;

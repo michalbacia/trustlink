@@ -21,7 +21,7 @@ namespace Trustlink.SmartContract
         public TriggerType Trigger { get; }
         public IVerifiable ScriptContainer { get; }
         public Snapshot Snapshot { get; }
-        public long GasConsumed { get; private set; } = 0;
+        public long LinkConsumed { get; private set; } = 0;
         public UInt160 CurrentScriptHash => CurrentContext?.GetState<ExecutionContextState>().ScriptHash;
         public UInt160 CallingScriptHash => InvocationStack.Count > 1 ? InvocationStack.Peek(1).GetState<ExecutionContextState>().ScriptHash : null;
         public UInt160 EntryScriptHash => EntryContext?.GetState<ExecutionContextState>().ScriptHash;
@@ -43,10 +43,10 @@ namespace Trustlink.SmartContract
             return disposable;
         }
 
-        private bool AddGas(long gas)
+        private bool AddLink(long lnk)
         {
-            GasConsumed = checked(GasConsumed + gas);
-            return testMode || GasConsumed <= link_amount;
+            LinkConsumed = checked(LinkConsumed + lnk);
+            return testMode || LinkConsumed <= link_amount;
         }
 
         protected override void LoadContext(ExecutionContext context)
@@ -71,7 +71,7 @@ namespace Trustlink.SmartContract
 
         protected override bool OnSysCall(uint method)
         {
-            if (!AddGas(InteropService.GetPrice(method, CurrentContext.EvaluationStack)))
+            if (!AddLink(InteropService.GetPrice(method, CurrentContext.EvaluationStack)))
                 return false;
             return InteropService.Invoke(this, method);
         }
@@ -80,7 +80,7 @@ namespace Trustlink.SmartContract
         {
             if (CurrentContext.InstructionPointer >= CurrentContext.Script.Length)
                 return true;
-            return AddGas(OpCodePrices[CurrentContext.CurrentInstruction.OpCode]);
+            return AddLink(OpCodePrices[CurrentContext.CurrentInstruction.OpCode]);
         }
 
         private static Block CreateDummyBlock(Snapshot snapshot)

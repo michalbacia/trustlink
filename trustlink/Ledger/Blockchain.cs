@@ -152,7 +152,7 @@ namespace Trustlink.Ledger
             byte[] script;
             using (ScriptBuilder sb = new ScriptBuilder())
             {
-                sb.EmitSysCall(InteropService.Neo_Native_Deploy);
+                sb.EmitSysCall(InteropService.Trustlink_Native_Deploy);
                 script = sb.ToArray();
             }
             return new Transaction

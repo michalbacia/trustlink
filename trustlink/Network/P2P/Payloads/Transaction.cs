@@ -68,7 +68,7 @@ namespace Trustlink.Network.P2P.Payloads
             sizeof(byte) +  //Version
             sizeof(uint) +  //Nonce
             20 +            //Sender
-            sizeof(long) +  //Gas
+            sizeof(long) +  //LinkConsumed
             sizeof(long) +  //NetworkFee
             sizeof(uint);   //ValidUntilBlock
 

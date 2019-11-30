@@ -69,16 +69,16 @@ namespace Trustlink.Network.RPC
         }
 
         public Wallet Wallet { get; set; }
-        public long MaxGasInvoke { get; }
+        public long MaxLinkInvoke { get; }
 
         private IWebHost host;
         private readonly TrustlinkSystem system;
 
-        public RpcServer(TrustlinkSystem system, Wallet wallet = null, long maxGasInvoke = default)
+        public RpcServer(TrustlinkSystem system, Wallet wallet = null, long maxLinkInvoke = default)
         {
             this.system = system;
             this.Wallet = wallet;
-            this.MaxGasInvoke = maxGasInvoke;
+            this.MaxLinkInvoke = maxLinkInvoke;
         }
 
         private static JObject CreateErrorResponse(JObject id, int code, string message, JObject data = null)
@@ -111,11 +111,11 @@ namespace Trustlink.Network.RPC
 
         private JObject GetInvokeResult(byte[] script, IVerifiable checkWitnessHashes = null)
         {
-            ApplicationEngine engine = ApplicationEngine.Run(script, checkWitnessHashes, extraLINK: MaxGasInvoke);
+            ApplicationEngine engine = ApplicationEngine.Run(script, checkWitnessHashes, extraLINK: MaxLinkInvoke);
             JObject json = new JObject();
             json["script"] = script.ToHexString();
             json["state"] = engine.State;
-            json["gas_consumed"] = engine.GasConsumed.ToString();
+            json["link_consumed"] = engine.LinkConsumed.ToString();
             try
             {
                 json["stack"] = new JArray(engine.ResultStack.Select(p => p.ToParameter().ToJson()));

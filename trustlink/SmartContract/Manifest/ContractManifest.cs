@@ -37,7 +37,7 @@ namespace Trustlink.SmartContract.Manifest
         public ContractFeatures Features { get; set; }
 
         /// <summary>
-        /// For technical details of ABI, please refer to TLP-3: NeoContract 
+        /// For technical details of ABI, please refer to TLP-3: Trustlink 
         /// </summary>
         public ContractAbi Abi { get; set; }
 

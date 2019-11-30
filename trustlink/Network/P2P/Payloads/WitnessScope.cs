@@ -6,7 +6,7 @@ namespace Trustlink.Network.P2P.Payloads
     public enum WitnessScope : byte
     {
         /// <summary>
-        /// Global allows this witness in all contexts (default Neo2 behavior)
+        /// Global allows this witness in all contexts (default TRSTLINK behavior)
         /// This cannot be combined with other flags
         /// </summary>
         Global = 0x00,
@@ -14,7 +14,7 @@ namespace Trustlink.Network.P2P.Payloads
         /// <summary>
         /// CalledByEntry means that this condition must hold: EntryScriptHash == CallingScriptHash
         /// No params is needed, as the witness/permission/signature given on first invocation will automatically expire if entering deeper internal invokes
-        /// This can be default safe choice for native TRUST/LINK (previously used on Neo 2 as "attach" mode)
+        /// This can be default safe choice for native TRUST/LINK (previously used on Trustlink 2 as "attach" mode)
         /// </summary>
         CalledByEntry = 0x01,
 
