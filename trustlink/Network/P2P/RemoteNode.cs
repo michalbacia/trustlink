@@ -17,7 +17,7 @@ namespace Trustlink.Network.P2P
     {
         internal class Relay { public IInventory Inventory; }
 
-        private readonly NeoSystem system;
+        private readonly TrustlinkSystem system;
         private readonly IActorRef protocol;
         private readonly Queue<Message> message_queue_high = new Queue<Message>();
         private readonly Queue<Message> message_queue_low = new Queue<Message>();
@@ -32,7 +32,7 @@ namespace Trustlink.Network.P2P
         public uint LastBlockIndex { get; private set; } = 0;
         public bool IsFullNode { get; private set; } = false;
 
-        public RemoteNode(NeoSystem system, object connection, IPEndPoint remote, IPEndPoint local)
+        public RemoteNode(TrustlinkSystem system, object connection, IPEndPoint remote, IPEndPoint local)
             : base(connection, remote, local)
         {
             this.system = system;
@@ -222,7 +222,7 @@ namespace Trustlink.Network.P2P
             base.PostStop();
         }
 
-        internal static Props Props(NeoSystem system, object connection, IPEndPoint remote, IPEndPoint local)
+        internal static Props Props(TrustlinkSystem system, object connection, IPEndPoint remote, IPEndPoint local)
         {
             return Akka.Actor.Props.Create(() => new RemoteNode(system, connection, remote, local)).WithMailbox("remote-node-mailbox");
         }

@@ -55,7 +55,7 @@ namespace Trustlink.Ledger
         private readonly static byte[] onPersistNativeContractScript;
         private const int MaxTxToReverifyPerIdle = 10;
         private static readonly object lockObj = new object();
-        private readonly NeoSystem system;
+        private readonly TrustlinkSystem system;
         private readonly List<UInt256> header_index = new List<UInt256>();
         private uint stored_header_count = 0;
         private readonly Dictionary<UInt256, Block> block_cache = new Dictionary<UInt256, Block>();
@@ -94,7 +94,7 @@ namespace Trustlink.Ledger
             }
         }
 
-        public Blockchain(NeoSystem system, Store store)
+        public Blockchain(TrustlinkSystem system, Store store)
         {
             this.system = system;
             this.MemPool = new MemoryPool(system, ProtocolSettings.Default.MemoryPoolMaxTransactions);
@@ -503,7 +503,7 @@ namespace Trustlink.Ledger
             currentSnapshot?.Dispose();
         }
 
-        public static Props Props(NeoSystem system, Store store)
+        public static Props Props(TrustlinkSystem system, Store store)
         {
             return Akka.Actor.Props.Create(() => new Blockchain(system, store)).WithMailbox("blockchain-mailbox");
         }

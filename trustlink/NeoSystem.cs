@@ -11,9 +11,9 @@ using Trustlink.Wallets;
 
 namespace Trustlink
 {
-    public class NeoSystem : IDisposable
+    public class TrustlinkSystem : IDisposable
     {
-        public ActorSystem ActorSystem { get; } = ActorSystem.Create(nameof(NeoSystem),
+        public ActorSystem ActorSystem { get; } = ActorSystem.Create(nameof(TrustlinkSystem),
             $"akka {{ log-dead-letters = off }}" +
             $"blockchain-mailbox {{ mailbox-type: \"{typeof(BlockchainMailbox).AssemblyQualifiedName}\" }}" +
             $"task-manager-mailbox {{ mailbox-type: \"{typeof(TaskManagerMailbox).AssemblyQualifiedName}\" }}" +
@@ -30,7 +30,7 @@ namespace Trustlink
         private ChannelsConfig start_message = null;
         private bool suspend = false;
 
-        public NeoSystem(Store store)
+        public TrustlinkSystem(Store store)
         {
             this.store = store;
             Plugin.LoadPlugins(this);

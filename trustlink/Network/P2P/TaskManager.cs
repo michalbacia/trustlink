@@ -23,7 +23,7 @@ namespace Trustlink.Network.P2P
         private static readonly TimeSpan TimerInterval = TimeSpan.FromSeconds(30);
         private static readonly TimeSpan TaskTimeout = TimeSpan.FromMinutes(1);
 
-        private readonly NeoSystem system;
+        private readonly TrustlinkSystem system;
         private const int MaxConncurrentTasks = 3;
         private readonly FIFOSet<UInt256> knownHashes;
         private readonly Dictionary<UInt256, int> globalTasks = new Dictionary<UInt256, int>();
@@ -33,7 +33,7 @@ namespace Trustlink.Network.P2P
         private readonly UInt256 HeaderTaskHash = UInt256.Zero;
         private bool HasHeaderTask => globalTasks.ContainsKey(HeaderTaskHash);
 
-        public TaskManager(NeoSystem system)
+        public TaskManager(TrustlinkSystem system)
         {
             this.system = system;
             this.knownHashes = new FIFOSet<UInt256>(Blockchain.Singleton.MemPool.Capacity * 2);
@@ -193,7 +193,7 @@ namespace Trustlink.Network.P2P
             base.PostStop();
         }
 
-        public static Props Props(NeoSystem system)
+        public static Props Props(TrustlinkSystem system)
         {
             return Akka.Actor.Props.Create(() => new TaskManager(system)).WithMailbox("task-manager-mailbox");
         }

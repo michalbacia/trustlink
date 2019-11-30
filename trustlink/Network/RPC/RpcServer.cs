@@ -72,9 +72,9 @@ namespace Trustlink.Network.RPC
         public long MaxGasInvoke { get; }
 
         private IWebHost host;
-        private readonly NeoSystem system;
+        private readonly TrustlinkSystem system;
 
-        public RpcServer(NeoSystem system, Wallet wallet = null, long maxGasInvoke = default)
+        public RpcServer(TrustlinkSystem system, Wallet wallet = null, long maxGasInvoke = default)
         {
             this.system = system;
             this.Wallet = wallet;

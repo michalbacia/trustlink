@@ -26,7 +26,7 @@ namespace Trustlink.Ledger
         // These two are not expected to be hit, they are just safegaurds.
         private static readonly double MaxMillisecondsToReverifyTxPerIdle = (double)Blockchain.MillisecondsPerBlock / 15;
 
-        private readonly NeoSystem _system;
+        private readonly TrustlinkSystem _system;
 
         //
         /// <summary>
@@ -95,7 +95,7 @@ namespace Trustlink.Ledger
 
         public int UnVerifiedCount => _unverifiedTransactions.Count;
 
-        public MemoryPool(NeoSystem system, int capacity)
+        public MemoryPool(TrustlinkSystem system, int capacity)
         {
             _system = system;
             Capacity = capacity;

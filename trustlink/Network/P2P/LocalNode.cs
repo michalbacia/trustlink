@@ -22,7 +22,7 @@ namespace Trustlink.Network.P2P
         public const uint ProtocolVersion = 0;
 
         private static readonly object lockObj = new object();
-        private readonly NeoSystem system;
+        private readonly TrustlinkSystem system;
         internal readonly ConcurrentDictionary<IActorRef, RemoteNode> RemoteNodes = new ConcurrentDictionary<IActorRef, RemoteNode>();
 
         public int ConnectedCount => RemoteNodes.Count;
@@ -47,7 +47,7 @@ namespace Trustlink.Network.P2P
             UserAgent = $"/{Assembly.GetExecutingAssembly().GetName().Name}:{Assembly.GetExecutingAssembly().GetVersion()}/";
         }
 
-        public LocalNode(NeoSystem system)
+        public LocalNode(TrustlinkSystem system)
         {
             lock (lockObj)
             {
@@ -173,7 +173,7 @@ namespace Trustlink.Network.P2P
             Connections.Tell(inventory);
         }
 
-        public static Props Props(NeoSystem system)
+        public static Props Props(TrustlinkSystem system)
         {
             return Akka.Actor.Props.Create(() => new LocalNode(system));
         }

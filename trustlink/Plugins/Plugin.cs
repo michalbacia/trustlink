@@ -22,7 +22,7 @@ namespace Trustlink.Plugins
 
         private static int suspend = 0;
 
-        protected static NeoSystem System { get; private set; }
+        protected static TrustlinkSystem System { get; private set; }
         public virtual string Name => GetType().Name;
         public virtual Version Version => GetType().Assembly.GetName().Version;
         public virtual string ConfigFile => Path.Combine(pluginsPath, GetType().Assembly.GetName().Name, "config.json");
@@ -80,7 +80,7 @@ namespace Trustlink.Plugins
             return new ConfigurationBuilder().AddJsonFile(ConfigFile, optional: true).Build().GetSection("PluginConfiguration");
         }
 
-        internal static void LoadPlugins(NeoSystem system)
+        internal static void LoadPlugins(TrustlinkSystem system)
         {
             System = system;
             if (!Directory.Exists(pluginsPath)) return;
